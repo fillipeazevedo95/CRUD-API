@@ -1,0 +1,20 @@
+{
+  "name": "api-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fillipeazevedo95/CRUD-API.git"
+  },
+  "keywords": [],
+  "author": "Fillipe Azevedo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fillipeazevedo95/CRUD-API/issues"
+  },
+  "homepage": "https://github.com/fillipeazevedo95/CRUD-API#readme"
+}

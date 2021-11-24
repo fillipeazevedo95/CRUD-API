@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/users', users);
-app.use('/api/auth', auth);
+app.use('/api/login', auth);
 
 // HELMET AND CORS
 app.use(helmet());

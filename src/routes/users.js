@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/user', auth, async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user._id).select('-password -__v');
         res.send(user);
@@ -33,3 +33,12 @@ router.get('/user', auth, async (req, res) => {
 });
 
 module.exports = router;
+
+//app.post('/user/register', Validation(UserValidation.store), userController.store); //feita
+//app.post('/user/login', Validation(UserValidation.login), userController.login); //feita
+
+//app.put('/user/:id', auth.required, Validation(UserValidation.update), userController.update);
+//app.delete('/user/:id', auth.required, userController.remove);
+
+//app.get('/users', auth.required, userController.index);
+//app.get('/user/:id', auth.required, Validation(UserValidation.show), userController.show); //feita

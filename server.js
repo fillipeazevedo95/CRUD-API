@@ -15,22 +15,29 @@ connection();
 // PORT
 const PORT = process.env.PORT || 8080;
 
+// ROUTES
+const users = require('./src/routes/users');
+const auth = require('./src/routes/auth');
+
 // SETUP BODY PARSER
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 // HELMET AND CORS
 app.use(helmet());
 app.use(cors());
 
-// 404 - ROTA
+// 404 - ROUTE
 app.use((req, res, next) => {
     const err = new Error('Not Found');
     err.status = 404;
     next(err)
 });
 
-// ROTA - 422, 500, 401
+// ROUTE - 422, 500, 401
 app.use((err, req, res, next) => {
     res.status(err.status || 500);
     if (err.status !== 404) console.warn("Error: ", err.message, new Date());

@@ -1,11 +1,16 @@
+// PACKAGES
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
+const connection = require('./src/db')
 require('dotenv').config();
 
 // START
 const app = express();
+
+// CONNECTION TO DATABASE
+connection();
 
 // PORT
 const PORT = process.env.PORT || 8080;

@@ -45,13 +45,28 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-module.exports = router;
+// PUT /UPDATE
+router.put('/:id', auth, async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+        const user = await User.findByIdAndUpdate(req.user._id, {
+            name: name,
+            email: email,
+            password: password
+        }, { new: true })
 
-//app.post('/user/register', Validation(UserValidation.store), userController.store); //feita
-//app.post('/user/login', Validation(UserValidation.login), userController.login); //feita
+        const salt = await bcrypt.genSalt(Number(process.env.SALT));
+        user.password = await bcrypt.hash(user.password, salt);
+        await user.save();
+
+        res.send(user);
+    } catch (error) {
+        console.log(error);
+        res.send('An error occured')
+    }
+});
+
+module.exports = router;
 
 //app.put('/user/:id', auth.required, Validation(UserValidation.update), userController.update);
 //app.delete('/user/:id', auth.required, userController.remove);
-
-//app.get('/users', auth.required, userController.index);
-//app.get('/user/:id', auth.required, Validation(UserValidation.show), userController.show); //feita

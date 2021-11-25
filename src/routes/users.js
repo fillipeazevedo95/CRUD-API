@@ -55,8 +55,7 @@ router.put('/:id', auth, async (req, res) => {
         
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
         user.password = await bcrypt.hash(password, salt);
-        
-        
+              
         await user.save();
 
         res.sendStatus(204); 

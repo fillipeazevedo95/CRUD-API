@@ -49,17 +49,17 @@ router.get('/', auth, async (req, res) => {
 router.put('/:id', auth, async (req, res) => {
     try {
         const { name, email, password } = req.body;
-        const user = await User.findByIdAndUpdate(req.user._id, {
-            name: name,
-            email: email,
-            password: password
-        }, { new: true })
-
+        const user = await User.findById(req.params.id);
+        if(typeof name !== "undefined") user.name = name;
+        if(typeof email !== "undefined") user.email = email;
+        
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
-        user.password = await bcrypt.hash(user.password, salt);
+        user.password = await bcrypt.hash(password, salt);
+        
+        
         await user.save();
 
-        res.sendStatus(204);
+        res.sendStatus(204); 
     } catch (error) {
         console.log(error);
         res.send('An error occured')
@@ -69,7 +69,7 @@ router.put('/:id', auth, async (req, res) => {
 // DELETE
 router.delete('/:id', auth, async (req, res) => {
     try {
-        const user = await User.findById(req.user._id);
+        const user = await User.findById(req.params.id);
         user.remove()
         res.sendStatus(204);
     } catch (error) {

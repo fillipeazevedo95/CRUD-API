@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 
 router.post('/', async (req, res) => {
     try {
@@ -24,6 +25,15 @@ router.post('/', async (req, res) => {
     } catch (error) {
         console.log(error);
         res.send('An error occured');
+    }
+});
+
+router.get('/', auth, async (req, res) => {
+    try {
+        res.json('you are authenticated.');
+    } catch (error) {
+        console.log(error);
+        res.send("An error occured")
     }
 });
 

@@ -59,7 +59,19 @@ router.put('/:id', auth, async (req, res) => {
         user.password = await bcrypt.hash(user.password, salt);
         await user.save();
 
-        res.send(user);
+        res.sendStatus(204);
+    } catch (error) {
+        console.log(error);
+        res.send('An error occured')
+    }
+});
+
+// DELETE
+router.delete('/:id', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        user.remove()
+        res.sendStatus(204);
     } catch (error) {
         console.log(error);
         res.send('An error occured')
@@ -67,6 +79,3 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 module.exports = router;
-
-//app.put('/user/:id', auth.required, Validation(UserValidation.update), userController.update);
-//app.delete('/user/:id', auth.required, userController.remove);

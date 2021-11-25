@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 
+// POST /REGISTER
 router.post('/', async (req, res) => {
     try {
         const { error } = validate(req.body);
@@ -22,6 +23,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+// GET /:id
 router.get('/:id', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user._id).select('-password -__v');
@@ -29,6 +31,17 @@ router.get('/:id', auth, async (req, res) => {
     } catch (error) {
         console.log(error);
         res.send('An error occured');
+    }
+});
+
+// GET
+router.get('/', auth, async (req, res) => {
+    try {
+        const user = await User.find({});
+        res.send(user);
+    } catch (erro) {
+        console.log(error);
+        res.send('An error occured')
     }
 });
 

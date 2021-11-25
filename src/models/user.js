@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 
-const userShema = new Schema({
+const userSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -18,12 +18,12 @@ const userShema = new Schema({
     }
 });
 
-userShema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY);
     return token;
 };
 
-const User = mongoose.model('user', userShema);
+const User = mongoose.model('user', userSchema);
 
 const validate = (user) => {
     const schema = Joi.object({

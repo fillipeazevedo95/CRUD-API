@@ -15,20 +15,19 @@ connection();
 // PORT
 const PORT = process.env.PORT || 8080;
 
-// ROUTES
-const users = require('./src/routes/users');
-const auth = require('./src/routes/auth');
-
 // SETUP BODY PARSER
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/api/users', users);
-app.use('/api/login', auth);
-
 // HELMET AND CORS
 app.use(helmet());
 app.use(cors());
+
+// ROUTES
+const users = require('./src/routes/users');
+const auth = require('./src/routes/auth');
+app.use('/api/users', users);
+app.use('/api/login', auth);
 
 // 404 - ROUTE
 app.use((req, res, next) => {

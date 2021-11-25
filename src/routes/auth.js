@@ -5,6 +5,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 
+// POST /LOGIN
 router.post('/', async (req, res) => {
     try {
         const { error } = validate(req.body);
@@ -28,6 +29,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+// GET /WARNING
 router.get('/', auth, async (req, res) => {
     try {
         res.json('you are authenticated.');

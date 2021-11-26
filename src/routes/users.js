@@ -37,9 +37,9 @@ router.get('/:id', auth, async (req, res) => {
 // GET
 router.get('/', auth, async (req, res) => {
     try {
-        const user = await User.find({});
-        res.send(user);
-    } catch (erro) {
+        const user = await User.find({}, '-password')
+        res.send(user)
+    } catch (error) {
         console.log(error);
         res.send('An error occured')
     }
@@ -52,10 +52,11 @@ router.put('/:id', auth, async (req, res) => {
         const user = await User.findById(req.params.id);
         if(typeof name !== "undefined") user.name = name;
         if(typeof email !== "undefined") user.email = email;
-        
-        const salt = await bcrypt.genSalt(Number(process.env.SALT));
-        user.password = await bcrypt.hash(password, salt);
-              
+        if(typeof password !== "undefined") {
+            const salt = await bcrypt.genSalt(Number(process.env.SALT));
+            user.password = await bcrypt.hash(password, salt);
+        }
+                  
         await user.save();
 
         res.sendStatus(204); 

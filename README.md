@@ -17,7 +17,7 @@ Requisições para a API devem seguir os padrões:
 
 ## Executando
 
-0. Crie um arquivo `.env` , com sua configuração, você tem exemplo em `.env.example`.
+1. Crie um arquivo `.env` , com sua configuração, você tem exemplo em `.env.example`.
 
 ```.env
     DB = "mongodb://localhost:27017/test-api"
@@ -25,13 +25,13 @@ Requisições para a API devem seguir os padrões:
     SALT = 10
 ```
 
-1. Se você deseja executar a API REST em modo de produção, deve executar no terminal `npm run production`.
+2. Se você deseja executar a API REST em modo de produção, deve executar no terminal `npm run production`.
 
-2. Caso queira monitorar como está o processo da api, deve executar no terminal `pm2 monit`.
+3. Caso queira monitorar como está o processo da api, deve executar no terminal `pm2 monit`.
 
 ## Executando Teste
 
-0.Se você deseja executar o teste, você deve executar no terminal `npm run test`.
+Se você deseja executar o teste, você deve executar no terminal `npm run test`.
 
 ## Criando usuário [POST]
 

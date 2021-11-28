@@ -90,7 +90,7 @@ Se você deseja executar o teste, você deve executar no terminal `npm run test`
 
 ## Buscar usuário por ID [GET]
 
-+ Request: GET /api/users/61a3984f884a356d1d1b9d26
++ Request: GET /api/users/:id
     
     + Header
 
@@ -135,7 +135,7 @@ Se você deseja executar o teste, você deve executar no terminal `npm run test`
 
 ## Alterando dados do usuário [PUT]
 
-+ Request: PUT /api/users/61a39ba787556c8cc536fbd1
++ Request: PUT /api/users/:id
     
     + Header
 
@@ -157,7 +157,7 @@ Se você deseja executar o teste, você deve executar no terminal `npm run test`
 
 ## Deletando um usuário [DELETE]
 
-+ Request: DELETE /api/users/61a39ba787556c8cc536fbd1 
++ Request: DELETE /api/users/:id 
     
     + Header
 

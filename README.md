@@ -23,6 +23,7 @@ Requisições para a API devem seguir os padrões:
     DB = "mongodb://localhost:27017/test-api"
     JWTPRIVATEKEY = "secretKey"
     SALT = 10
+    PORT = 3000
 ```
 
 2. Se você deseja executar a API REST em modo de produção, deve executar no terminal `npm run production`.
@@ -94,13 +95,6 @@ Se você deseja executar o teste, você deve executar no terminal `npm run test`
     + Header
 
             x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWEzOWJhNzg3NTU2YzhjYzUzNmZiZDEiLCJpYXQiOjE2MzgxMTI2ODh9.n0BwoNhy5FMXifvTC7xrUODDM_tuHc5owc8OoKh_5D4
-
-    + Body
-
-            {
-                    "email": "teste@teste.com",
-                    "password": "[Senha utilizada]"
-            }
 
 + Response 200 23.361 ms
 

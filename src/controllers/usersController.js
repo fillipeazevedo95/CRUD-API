@@ -1,5 +1,6 @@
 const { User, validate } = require('../models/user');
 const bcrypt = require('bcrypt');
+const isUndefined = require('../lib/validations')
 
 class UsersAuth {
     // POST /REGISTER
@@ -43,14 +44,14 @@ class UsersAuth {
         }
     };
 
-    // PUT /UPDATE
-    async update (req, res) {
+   // PUT /UPDATE
+   async update (req, res) {
         try {
             const { name, email, password } = req.body;
             const user = await User.findById(req.params.id);
-            if(typeof name !== "undefined") user.name = name;
-            if(typeof email !== "undefined") user.email = email;
-            if(typeof password !== "undefined") {
+            if(!isUndefined(name)) user.name = name;
+            if(!isUndefined(email)) user.email = email;
+            if(!isUndefined(password)) {
                 const salt = await bcrypt.genSalt(Number(process.env.SALT));
                 user.password = await bcrypt.hash(password, salt);
             }

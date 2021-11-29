@@ -30,9 +30,9 @@ Requisições para a API devem seguir os padrões:
 
 3. Caso queira monitorar como está o processo da api, deve executar no terminal `pm2 monit`.
 
-## Executando Teste
+## Executando em modo de desenvolvimento
 
-Se você deseja executar o teste, você deve executar no terminal `npm run test`.
+Se você deseja executar em modo de desenvolvimento, você deve executar no terminal `npm run dev`.
 
 ## Criando usuário [POST]
 

@@ -1,6 +1,7 @@
 const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
+const logger = require('../logger');
 
 const validate = (user) => {
     const schema = Joi.object({
@@ -31,7 +32,7 @@ class LoginAuth {
             const token = user.generateAuthToken();
             res.send(token);
         } catch (error) {
-            console.log(error);
+            logger.error(error);
             next(error);
         }
     };
@@ -41,7 +42,7 @@ class LoginAuth {
         try {
             res.json('you are authenticated.');
         } catch (error) {
-            console.log(error);
+            logger.error(error);
             next(error);
         }
     };

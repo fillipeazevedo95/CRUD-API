@@ -29,6 +29,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.13",
     "morgan-body": "^2.6.6",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pino": "^7.5.0",
+    "pino-http": "^6.3.3",
+    "pino-pretty": "^7.2.0"
   }
 }

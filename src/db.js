@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const logger = require('../src/logger');
 
 module.exports = async () => {
     try {
@@ -6,8 +7,8 @@ module.exports = async () => {
             useNewUrlParser: true
         };
         await mongoose.connect(process.env.DB, connectionParams);
-        console.log("connected to database");
+        logger.info("connected to database");
     } catch (error) {
-        console.log("could not connect to database", error);
+        logger.info("could not connect to database", error);
     }  
 };

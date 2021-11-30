@@ -1,6 +1,7 @@
 const { User, validate } = require('../models/user');
 const bcrypt = require('bcrypt');
-const isUndefined = require('../lib/validations')
+const isUndefined = require('../lib/validations');
+const logger = require('../logger');
 
 class UsersAuth {
     // POST /REGISTER
@@ -17,7 +18,7 @@ class UsersAuth {
 
             res.send(user);
         } catch (error) {
-            console.log(error);
+            logger.error(error);
             next(error);
         }
     };
@@ -28,7 +29,7 @@ class UsersAuth {
             const user = await User.findById(req.user._id).select('-password -__v');
             res.send(user);
         } catch (error) {
-            console.log(error);
+            logger.error(error);
             next(error);
         }
     };kkk
@@ -39,7 +40,7 @@ class UsersAuth {
             const user = await User.find({}, '-password')
             res.send(user)
         } catch (error) {
-            console.log(error);
+            logger.error(error);
             next(error);
         }
     };
@@ -60,7 +61,7 @@ class UsersAuth {
 
             res.sendStatus(204); 
         } catch (error) {
-            console.log(error);
+            logger.error(error);
             next(error);
         }
     };
@@ -72,7 +73,7 @@ class UsersAuth {
             user.remove()
             res.sendStatus(204);
         } catch (error) {
-            console.log(error);
+            logger.error(error);
             next(error);
         }
     };

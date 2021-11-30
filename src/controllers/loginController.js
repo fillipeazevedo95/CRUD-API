@@ -13,7 +13,7 @@ const validate = (user) => {
 class LoginAuth {
 
     // POST /LOGIN
-    async login(req, res) {
+    async login(req, res, next) {
         try {
             const { error } = validate(req.body);
             if (error) return res.status(400).send(error.details[0].message)
@@ -32,17 +32,17 @@ class LoginAuth {
             res.send(token);
         } catch (error) {
             console.log(error);
-            res.send('An error occured');
+            next(error);
         }
     };
 
     // GET /WARNING
-    async authorization(req, res) {
+    async authorization(req, res, next) {
         try {
             res.json('you are authenticated.');
         } catch (error) {
             console.log(error);
-            res.send("An error occured")
+            next(error);
         }
     };
 }

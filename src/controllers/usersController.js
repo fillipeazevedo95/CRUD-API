@@ -4,7 +4,7 @@ const isUndefined = require('../lib/validations')
 
 class UsersAuth {
     // POST /REGISTER
-    async store (req, res) {
+    async store (req, res, next) {
         try {
             const { error } = validate(req.body);
             if (error) return res.status(400).send(error.details[0].message);
@@ -18,34 +18,34 @@ class UsersAuth {
             res.send(user);
         } catch (error) {
             console.log(error);
-            res.send('An error eccured');
+            next(error);
         }
     };
 
     // GET /:id
-    async show (req, res) {
+    async show (req, res, next) {
         try {
             const user = await User.findById(req.user._id).select('-password -__v');
             res.send(user);
         } catch (error) {
             console.log(error);
-            res.send('An error occured');
+            next(error);
         }
-    };
+    };kkk
 
     // GET
-    async index (req, res) {
+    async index (req, res, next) {
         try {
             const user = await User.find({}, '-password')
             res.send(user)
         } catch (error) {
             console.log(error);
-            res.send('An error occured')
+            next(error);
         }
     };
 
    // PUT /UPDATE
-   async update (req, res) {
+   async update (req, res, next) {
         try {
             const { name, email, password } = req.body;
             const user = await User.findById(req.params.id);
@@ -61,19 +61,19 @@ class UsersAuth {
             res.sendStatus(204); 
         } catch (error) {
             console.log(error);
-            res.send('An error occured')
+            next(error);
         }
     };
 
     // DELETE
-    async remove (req, res) {
+    async remove (req, res, next) {
         try {
             const user = await User.findById(req.params.id);
             user.remove()
             res.sendStatus(204);
         } catch (error) {
             console.log(error);
-            res.send('An error occured')
+            next(error);
         }
     };
 }

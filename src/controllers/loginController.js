@@ -1,51 +1,36 @@
-const { User } = require('../models/user');
-const bcrypt = require('bcrypt');
-const Joi = require('joi');
-const logger = require('../logger');
-
-const validate = (user) => {
-    const schema = Joi.object({
-        email: Joi.string().email().required(),
-        password: Joi.string().required()
-    });
-    return schema.validate(user);
-};
+const { User } = require('../models/user')
+const bcrypt = require('bcrypt')
+const logger = require('../logger')
+const { validate } = require('../lib/validations')
 
 class LoginAuth {
+  // POST /LOGIN
+  async login (req, res, next) {
+    try {
+      const { error } = validate(req.body)
+      if (error) return res.status(400).send(error.details[0].message)
 
-    // POST /LOGIN
-    async login(req, res, next) {
-        try {
-            const { error } = validate(req.body);
-            if (error) return res.status(400).send(error.details[0].message)
+      const user = await User.findOne({ email: req.body.email })
+      if (!user) return res.status(400).send('Invalid email or password')
 
-            const user = await User.findOne({ email: req.body.email });
-            if (!user) return res.status(400).send('Invalid email or password');
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      )
+      if (!validPassword) { return res.status(400).send('Invalid email or password') }
 
-            const validPassword = await bcrypt.compare(
-                req.body.password,
-                user.password
-            );
-            if (!validPassword)
-                return res.status(400).send("Invalid email or password");
+      const token = user.generateAuthToken()
+      res.send(token)
+    } catch (error) {
+      logger.error(error)
+      next(error)
+    }
+  };
 
-            const token = user.generateAuthToken();
-            res.send(token);
-        } catch (error) {
-            logger.error(error);
-            next(error);
-        }
-    };
-
-    // GET /WARNING
-    async authorization(req, res, next) {
-        try {
-            res.json('you are authenticated.');
-        } catch (error) {
-            logger.error(error);
-            next(error);
-        }
-    };
+  // GET /WARNING
+  async authorization (req, res, next) {
+    res.json('you are authenticated.')
+  };
 }
 
-module.exports = LoginAuth;
+module.exports = LoginAuth

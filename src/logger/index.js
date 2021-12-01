@@ -1,10 +1,10 @@
 const pino = require('pino')({
-    transport: {
-        target: 'pino-pretty',
-        options: {
-            colorize: true
-        }
+  transport: {
+    target: 'pino-pretty',
+    options: {
+      colorize: true
     }
-});
+  }
+})
 
-module.exports = pino;
+module.exports = pino

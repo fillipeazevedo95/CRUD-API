@@ -1,19 +1,18 @@
-const { User, validate } = require('../models/user')
-const bcrypt = require('bcrypt')
-const { isUndefined } = require('../lib/validations')
+const { User } = require('../models/user')
+const { isUndefined, userValidate } = require('../lib/validations')
 const logger = require('../logger')
+const generatePassword = require('../lib/generatePassword')
 
 class UsersAuth {
   // POST /REGISTER
   async store (req, res, next) {
     try {
-      const { error } = validate(req.body)
+      const { error } = userValidate(req.body)
       if (error) return res.status(400).send(error.details[0].message)
 
       const user = new User(req.body)
+      user.password = await generatePassword(user.password)
 
-      const salt = await bcrypt.genSalt(Number(process.env.SALT))
-      user.password = await bcrypt.hash(user.password, salt)
       await user.save()
 
       res.status(201).send(user)
@@ -53,8 +52,7 @@ class UsersAuth {
       if (!isUndefined(name)) user.name = name
       if (!isUndefined(email)) user.email = email
       if (!isUndefined(password)) {
-        const salt = await bcrypt.genSalt(Number(process.env.SALT))
-        user.password = await bcrypt.hash(password, salt)
+       user.password = await generatePassword(password)
       }
 
       await user.save()

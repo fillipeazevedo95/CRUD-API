@@ -3,7 +3,7 @@ const router = express.Router()
 const auth = require('../middleware/auth')
 const UsersAuth = require('../controllers/usersController')
 
-const userAuth = new UsersAuth()
+const userAuth = new UsersAuth
 
 router.post('/', userAuth.store)
 router.get('/', auth, userAuth.index)

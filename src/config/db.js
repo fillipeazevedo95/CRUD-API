@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const logger = require('../logger')
+const logger = require('../lib/logger')
 
 module.exports = async () => {
   try {

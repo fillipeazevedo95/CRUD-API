@@ -9,7 +9,7 @@ const users = require('./src/routes/users');
 const auth = require('./src/routes/auth');
 require('dotenv').config();
 
-const logger = require('./src/logger');
+const logger = require('./src/lib/logger');
 const pinoHttp = require('pino-http')({logger});
 
 // START

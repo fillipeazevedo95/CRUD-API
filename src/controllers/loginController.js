@@ -1,6 +1,6 @@
 const { User } = require('../models/user')
 const bcrypt = require('bcrypt')
-const logger = require('../logger')
+const logger = require('../lib/logger')
 const { validate } = require('../lib/validations')
 const { generateAuthToken } = require('../lib/generateToken')
 

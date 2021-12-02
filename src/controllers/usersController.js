@@ -1,6 +1,6 @@
 const { User } = require('../models/user')
 const { isUndefined, userValidate } = require('../lib/validations')
-const logger = require('../logger')
+const logger = require('../lib/logger')
 const generatePassword = require('../lib/generatePassword')
 
 class UsersAuth {

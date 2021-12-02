@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 const morganBody = require('morgan-body');
-const connection = require('./src/db');
+const connection = require('./src/config/db');
 const users = require('./src/routes/users');
 const auth = require('./src/routes/auth');
 require('dotenv').config();

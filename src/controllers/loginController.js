@@ -2,10 +2,11 @@ const { User } = require('../models/user')
 const bcrypt = require('bcrypt')
 const logger = require('../logger')
 const { validate } = require('../lib/validations')
+const { generateAuthToken } = require('./generateToken')
 
 class LoginAuth {
   // POST /LOGIN
-  async login (req, res, next) {
+  async login(req, res, next) {
     try {
       const { error } = validate(req.body)
       if (error) return res.status(400).send(error.details[0].message)
@@ -19,7 +20,7 @@ class LoginAuth {
       )
       if (!validPassword) { return res.status(400).send('Invalid email or password') }
 
-      const token = user.generateAuthToken()
+      const token = generateAuthToken(user.id)
       res.send(token)
     } catch (error) {
       logger.error(error)
@@ -28,7 +29,7 @@ class LoginAuth {
   };
 
   // GET /WARNING
-  async authorization (req, res, next) {
+  async authorization(req, res, next) {
     res.json('you are authenticated.')
   };
 }

@@ -1,9 +1,9 @@
-const { User } = require('../models/user')
-const { isUndefined, userValidate } = require('../lib/validations')
-const logger = require('../lib/logger')
-const generatePassword = require('../lib/generatePassword')
+import { User } from '../models/user'
+import { isUndefined, userValidate } from '../lib/validations'
+import { logger } from '../lib/logger'
+import { encryptPassword } from '../lib/generatePassword'
 
-class UsersAuth {
+export class UsersAuth {
   // POST /REGISTER
   async store (req, res, next) {
     try {
@@ -11,7 +11,7 @@ class UsersAuth {
       if (error) return res.status(400).send(error.details[0].message)
 
       const user = new User(req.body)
-      user.password = await generatePassword(user.password)
+      user.password = await encryptPassword(user.password)
 
       await user.save()
 
@@ -52,7 +52,7 @@ class UsersAuth {
       if (!isUndefined(name)) user.name = name
       if (!isUndefined(email)) user.email = email
       if (!isUndefined(password)) {
-       user.password = await generatePassword(password)
+        user.password = await encryptPassword(password)
       }
 
       await user.save()
@@ -76,5 +76,3 @@ class UsersAuth {
     }
   };
 }
-
-module.exports = UsersAuth

@@ -1,6 +1,6 @@
-const Joi = require('joi')
+import Joi from 'joi'
 
-const userValidate = (user) => {
+export const userValidate = (user) => {
   const schema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
@@ -9,7 +9,7 @@ const userValidate = (user) => {
   return schema.validate(user)
 }
 
-const validate = (user) => {
+export const validate = (user) => {
   const schema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required()
@@ -17,8 +17,6 @@ const validate = (user) => {
   return schema.validate(user)
 }
 
-function isUndefined (props) {
+export function isUndefined (props) {
   return typeof props === 'undefined'
 }
-
-module.exports = { validate, isUndefined, userValidate }

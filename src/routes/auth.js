@@ -1,11 +1,11 @@
-const express = require('express')
-const router = express.Router()
-const auth = require('../middleware/auth')
-const LoginAuth = require('../controllers/loginController')
+import express from 'express'
+import { authMiddleware } from '../middleware/auth'
+import { LoginAuth } from '../controllers/loginController'
 
-const loginAuth = new LoginAuth
+const router = express.Router()
+const loginAuth = new LoginAuth()
 
 router.post('/', loginAuth.login)
-router.get('/', auth, loginAuth.authorization)
+router.get('/', authMiddleware, loginAuth.authorization)
 
-module.exports = router
+export const authRouter = router

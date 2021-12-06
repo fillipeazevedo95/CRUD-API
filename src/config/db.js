@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const logger = require('../lib/logger')
+import mongoose from 'mongoose'
+import { logger } from '../lib/logger'
 
-module.exports = async () => {
+export const connection = async () => {
   try {
     const connectionParams = {
       useNewUrlParser: true

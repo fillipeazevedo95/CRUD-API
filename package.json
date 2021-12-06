@@ -2,11 +2,12 @@
   "name": "api-crud",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "NODE_OPTIONS='--experimental-specifier-resolution=node' nodemon src/server.js",
     "production": "pm2 start server.js",
-    "lint": "eslint */.js --ignore-pattern node_modules/"
+    "lint": "eslint *.js --ignore-pattern node_modules/"
   },
   "repository": {
     "type": "git",
@@ -30,12 +31,12 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.13",
     "morgan-body": "^2.6.6",
-    "nodemon": "^2.0.15",
     "pino": "^7.5.0",
     "pino-http": "^6.3.3",
     "pino-pretty": "^7.2.0"
   },
   "devDependencies": {
+    "nodemon": "^2.0.15",
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-standard": "^16.0.3",

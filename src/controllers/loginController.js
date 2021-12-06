@@ -1,12 +1,12 @@
-const { User } = require('../models/user')
-const bcrypt = require('bcrypt')
-const logger = require('../lib/logger')
-const { validate } = require('../lib/validations')
-const { generateAuthToken } = require('../lib/generateToken')
+import { User } from '../models/user'
+import bcrypt from 'bcrypt'
+import { logger } from '../lib/logger'
+import { validate } from '../lib/validations'
+import { generateAuthToken } from '../lib/generateToken'
 
-class LoginAuth {
+export class LoginAuth {
   // POST /LOGIN
-  async login(req, res, next) {
+  async login (req, res, next) {
     try {
       const { error } = validate(req.body)
       if (error) return res.status(400).send(error.details[0].message)
@@ -29,9 +29,7 @@ class LoginAuth {
   };
 
   // GET /WARNING
-  async authorization(req, res, next) {
+  async authorization (req, res, next) {
     res.json('you are authenticated.')
   };
 }
-
-module.exports = LoginAuth

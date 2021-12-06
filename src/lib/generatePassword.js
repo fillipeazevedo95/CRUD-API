@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt')
+import bcrypt from 'bcrypt'
 
-module.exports = async function (password) {
+export const encryptPassword = async function (password) {
   const salt = await bcrypt.genSalt(Number(process.env.SALT))
   password = await bcrypt.hash(password, salt)
   return password

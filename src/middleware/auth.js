@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken'
 
-module.exports = (req, res, next) => {
+export const authMiddleware = async (req, res, next) => {
   try {
     const token = req.header('x-auth-token')
     if (!token) return res.status(403).send('Acess denied.')

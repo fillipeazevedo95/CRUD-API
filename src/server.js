@@ -13,7 +13,6 @@ import { logger } from './lib/logger'
 import pinoHttp from 'pino-http'
 import dotenv from 'dotenv'
 dotenv.config()
-pinoHttp({ logger })
 
 // START
 const app = express()
@@ -29,7 +28,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // PINO HTTP
-app.use(pinoHttp)
+app.use(pinoHttp({ logger }))
 
 // HELMET AND CORS
 app.use(helmet())

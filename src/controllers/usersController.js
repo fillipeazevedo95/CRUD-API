@@ -14,8 +14,7 @@ export class UsersAuth {
       user.password = await encryptPassword(user.password)
 
       await user.save()
-
-      res.status(201).send(user)
+      res.status(201).send('Account created successfully')
     } catch (error) {
       logger.error(error)
       next(error)
